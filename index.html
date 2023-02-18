@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/your-path-to-your-compiled-css-including-fontawesome/file.css" rel="stylesheet">
+    <!-- <link href="/your-path-to-your-compiled-css-including-fontawesome/file.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <title>💰BudgetTrack</title>
@@ -28,8 +28,8 @@
           <article class="navbar-end">
             <a id="btn-balance" class="navbar-item has-text-link-light navbar-item-hover-lik">
               <i class="button is-success" aria-hidden="true">Balance</i>                
-                <a id="btn-categorias" class="button is-warning">Categorias</a>
-                <a id="btn-reportes"class="button is-link" onclick="generarReportes()">Reportes</a>
+                <a id="btn-categorias" class="navbar-item is-link is-inverted" aria-hidden="true">Categorias</a>
+                <a id="btn-reportes"class="navbar-item is-success is-inverted"aria-hidden="true" onclick="generarReportes()">Reportes</a>
             </a>
           </article>
         </section>
@@ -72,6 +72,7 @@
             </section>
 
             <section id="filtros">
+
               <section class="field">
                 <label class="label"for="filtro-tipo">Tipo</label>
                 <article class="control">
@@ -95,7 +96,17 @@
               </section>
 
               <section class="field">
-                <label class="label" for="filtro-fecha">Ordenar por</label>
+                  <label for="filtro-fecha" class="label">Desde</label>
+                  <article class="control">
+                    <input id="filtro-fecha" class="input input is-rounded" type="date" name="label">
+                  </article>
+              </section>
+
+
+
+
+              <section class="field">
+                <label class="label" for="filtro-ordenar">Ordenar por</label>
                 <article class="control">
                   <article class="select is-fullwidth is-rounded">
                     <select id="filtro-ordenar">
@@ -131,6 +142,9 @@
 <!----------------------------------imagen sin operaciones generadas------------------------------------------------->
             <section id="ver-sin-operac">
               <article class="my-5 py-5"> <!--agregar imagen para la operacion etiqueta figure y adentro img-->
+                <figure class="my-5 py-5">
+                  <img src="./undraw_projections_re_ulc6.svg">
+                </figure>
                 <h4 class="title is-size-4 is-size-6-mobile has-text-centered mt-6">sin resultados</h4>
                 <p class="subtitle is-size-6 is-size-7-mobile has-text-centered"></p>
               </article>
@@ -169,14 +183,14 @@
               <input id="input-monto" class="input is-rounded" placeholder="Insert a number" type="number">
             </article>
 
-            <section>
+            <section class="field">
               <label for="input-tipo" class="label">Tipo</label>
               <article class="control">
                 <article class="select is-fullwidth is-rounded">
 
-                    <select>
+                    <select id="input-tipo">
                       <option value="gasto">Gasto</option>
-                      <option value="ganacia">Ganancia</option>
+                      <option value="ganancia">Ganancia</option>
                     </select>                
                 </article>
               </article>
@@ -193,7 +207,7 @@
 
             <article class="field">
               <label for="input-fecha" class="label">Fecha</label>
-              <input id="input-fecha" class="input is-rounded" type="date" name="label" >
+              <input id="input-fecha" class="input is-rounded" type="date" name="label">
             </article>
 
             <article class="field is-grouped is-grouped-right">
@@ -204,6 +218,7 @@
                 <a id="btn-agregar" class="button is-light is-rounded" aria-label="Botón de añadir nueva operación">Agregar</a>
               </p>
             </article>
+            
           </article>
         </section>
       </section>
@@ -372,7 +387,7 @@
               <div id="sin-reportes"class="field">
                 <div class="my-5 py-5">
                 <figure class="image mt-5">
-                  <!--buscar imagen y ponerlo aca-->
+                <img src="./undraw_transfer_money_re_6o1h.svg">  
                 </figure>
                 </div>
                 <div class="column is-align-items-center">

@@ -1,3 +1,14 @@
 .buttons{
     justify-content: flex-end;
 }
+.image{
+    max-width: 400px;
+    margin: 0 auto;
+}
+.hidden{
+    display: none;
+}
+
+#escribir-operacion{
+    height: 100%;
+}
