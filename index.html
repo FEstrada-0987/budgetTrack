@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/your-path-to-your-compiled-css-including-fontawesome/file.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+    <title>💰BudgetTrack</title>
+  </head>
+  <body>
+    <header>
+      <!--------------------------------------- NAV------------------------------------------------------->
+      <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+         <section class="navbar-brand">
+          <a class="navbar-item is-hovered" href="#"></a>
+            <h1 class="title is-size-2 has-text-white">💰BudgetTrack</h1>
+          </a>
+          <a id="navbar-burger" role="button" class="navbar-burger is-align-self-center aria-label"="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </section>  
+        <!--------------------------------------- NAV vis------------------------------------------------------->
+        <section id="navbar-menu" class="navbar-menu is-link"> 
+          <article class="navbar-end">
+            <a id="btn-balance" class="navbar-item has-text-link-light navbar-item-hover-lik">
+              <i class="button is-success" aria-hidden="true">Balance</i>                
+                <a id="btn-categorias" class="button is-warning">Categorias</a>
+                <a id="btn-reportes"class="button is-link" onclick="generarReportes()">Reportes</a>
+            </a>
+          </article>
+        </section>
+      </nav>
+    </header>
+<!--------------------------------------- MAIN------------------------------------------------------->
+  <main>
+    <div id="pag-balance"class="container pt-5">
+      <div class="title is-ancestor">
+        <div class="title is-vertical is-3-parent">
+<!----------------------------------BALANCE VERTICAL---------------------------------------------------------->
+          <section class="box">
+            <h2 class="title has-text-weight-bold is-mobile">Balance</h2>
+
+            <article class="columns is-vcentered is-mobile">
+              <span class="column title is-size-5 has-text-weight-normal">Ganacias</span>
+              <span id="balance-ganancias" class="column subtitle has-text-right has-text-sucess is-size-5">$0</span>
+            </article>
+
+            <article class="columns is-vcentered is-mobile">
+              <span class="column title is-size-5 has-text-weight-normal">Gastos</span>
+              <span id="balance-gastos" class="column subtitle has-text-right has-text-sucess is-size-5">$0</span>
+            </article>
+
+            <article class="columns is-vcentered is-mobile">
+              <span class="column title is-size-4 has-text-weight-normal">Total</span>
+              <span id="balance-total" class="column subtitle has-text-right has-text-sucess is-size-5">$0</span>
+            </article>                
+          </section>
+<!------------------------------------FILTROS VERTICALES-------------------------------------------------------------------------->
+          <section class="box">
+            <section class="columns is-vcentered is-mobile">
+              
+              <div class="column">
+                <span class="title has-text-weight-bold mb-4">Filtros</span>
+              </div>
+              <div class="column subtitle has-text-right is-size-6">
+                <a id="btn-ocultar-filtro" href="#" aria-label="boton ocultar y mostrar filtros">Ocultar</a>
+              </div>
+            </section>
+
+            <section id="filtros">
+              <section class="field">
+                <label class="label"for="filtro-tipo">Tipo</label>
+                <article class="control">
+                  <article class="select is-fullwidth is-rounded">
+                    <select id="filtro-tipo">
+                      <option value="todos">Todos</option>
+                      <option value="gasto">Gaso</option>
+                      <option value="ganancia">Ganancias</option>
+                    </select>
+                  </article>
+                </article>
+              </section>
+
+              <section class="field">
+                <label class="label" for="filtro-categoria">Categoria</label>
+                <article class="control">
+                  <article class="select is-fullwidth is-rounded">
+                    <select id="filtro-categoria"></select>
+                  </article>
+                </article>
+              </section>
+
+              <section class="field">
+                <label class="label" for="filtro-fecha">Ordenar por</label>
+                <article class="control">
+                  <article class="select is-fullwidth is-rounded">
+                    <select id="filtro-ordenar">
+                      <option value="a-z">A-Z</option>
+                      <option value="z-a">Z-A</option>
+                      <option value="mas-reciente">Mas reciente</option>
+                      <option value="menos-reciente">Menos reciente</option>
+                      <option value="mayor-monto">Mayor monto</option>
+                      <option value="menor-monto">Menor monto</option>
+                    </select>
+                  </article>
+                </article>
+              </section>
+
+            </section>
+          </section>
+        </div>
+<!---------------------------------OPERACIONES-------------------------------------------->
+
+        <div class="title is-parent">
+          <section class="title is-child box pl-5">
+
+            <section class="columns mb-4">
+              <article class="column">
+                <p class="is-size-4 has-text-weight-bold">Operaciones</p>
+              </article>
+
+              <article class="column has-text-right-tablet">
+                <button id="btn-nueva-operac" class="button button is-link is-rounded" aria-label="añade nueva operacion">Nueva Operacion 😀</button>
+              </article>
+            </section>
+
+<!----------------------------------imagen sin operaciones generadas------------------------------------------------->
+            <section id="ver-sin-operac">
+              <article class="my-5 py-5"> <!--agregar imagen para la operacion etiqueta figure y adentro img-->
+                <h4 class="title is-size-4 is-size-6-mobile has-text-centered mt-6">sin resultados</h4>
+                <p class="subtitle is-size-6 is-size-7-mobile has-text-centered"></p>
+              </article>
+            </section>
+<!----------------------------------- Tabla operaciones------------------------------------------------------------------------ -->
+              <section id="tabla-operaciones" class="hidden">
+                <article class="columns has-text-weight-semibold is-hidden-mobile">
+                  <div class="column is-3">Descripcion</div>
+                  <div class="column is-3">Categorias</div> 
+                  <div class="column is-2">Fecha</div> 
+                  <div class="column is-2">Monto</div> 
+                  <div class="column is-2 has-text-right">Acciones</div>        
+                </article>
+                <div id="escribir-operacion"></div>                
+              </section>
+          </section>
+        </div>
+
+      </div>
+    </div>   
+    
+<!--------------------------------------------------NUEVA Operacion--------------------------------------------------------------------->
+    <section id="pag-nueva-operac" class="container pt-5 hidden">
+      <section class="columns">
+        <section class="column is-8 is-offset-2">
+          <article class="box">
+            <h2 class="title is-size-2 has-text-weight-bold">Nueva Operacion</h2>
+
+            <article class="field mt-6">
+              <label for="input-descripcion" class="label">Descripcion</label>
+              <input id="input-descripcion" class="input is-rounded" placeholder="Insert a description" type="text">
+            </article>
+
+            <article>
+              <label for="input-monto" class="label">Monto</label>
+              <input id="input-monto" class="input is-rounded" placeholder="Insert a number" type="number">
+            </article>
+
+            <section>
+              <label for="input-tipo" class="label">Tipo</label>
+              <article class="control">
+                <article class="select is-fullwidth is-rounded">
+
+                    <select>
+                      <option value="gasto">Gasto</option>
+                      <option value="ganacia">Ganancia</option>
+                    </select>                
+                </article>
+              </article>
+            </section>
+
+            <section class="field">
+              <label for="categoria-operacion-select" class="lable">Categoria</label>
+              <article class="control">
+                <article class="select is-fullwidth is-rounded">
+                  <select id="categoria-operacion-select"></select>
+                </article>                
+              </article>
+            </section>
+
+            <article class="field">
+              <label for="input-fecha" class="label">Fecha</label>
+              <input id="input-fecha" class="input is-rounded" type="date" name="label" >
+            </article>
+
+            <article class="field is-grouped is-grouped-right">
+              <p class="control">
+                <a id="btn-cancelar" class="button is-light is-rounded" aria-label="Botón de cancelar añadir nueva operación">Cancelar</a>
+              </p>
+              <p class="control">
+                <a id="btn-agregar" class="button is-light is-rounded" aria-label="Botón de añadir nueva operación">Agregar</a>
+              </p>
+            </article>
+          </article>
+        </section>
+      </section>
+    </section>
+
+  <!----------------------------------------------EDITAR OPERACION------------------------------------------------------------------------------------------>
+
+    <section id="pagina-editar-operac" class="container pt-5 hidden">
+      <section class="columns">
+        <section class="column is-8 is-offset-2">
+          <article class="box">
+            <h2 class="title is-size-2 has-text-weight-bold">Editar Operacion  </h2>      
+            
+            <article class="field mt-6">
+              <label for="input-editar-descripcion" class="label">Descripcion</label>
+              <input id="input-editar-descripcion" class="input is-rounded" type="text" placeholder="Ingrese Descripcion">
+            </article>
+
+            <article class="field">
+              <label for="input-editar-monto" class="label">Monto</label>
+              <input id="input-editar-monto" class="input is-rounded" type="number" placeholder="Ingrese monto">
+            </article>
+
+            <section class="field">
+              <label for="input-editar-tipo" class="label">Tipo</label>
+              <article class="control">
+                <div class="select is-fullwidth is-rounded">
+                  <select id="input-editar-tipo">
+                    <option value="gasto">Gasto</option>
+                    <option value="ganancia">Ganancia</option>
+                  </select>                
+              </article>
+            </section>
+           </div>
+
+           <section class="field">
+            <label for="categoria-operac-editar-select" class="label">Categoria</label>
+            <article class="control">
+              <article class="select is-fullwidth is-rounded">
+                <select id="categoria-operac-editar-select"></select>
+              </article>
+            </article>
+          </section>
+
+          <article class="field">
+            <label for="input-editar-fecha" class="label">Fecha</label>
+            <input id="input-editar-fecha" class="input is-rounded" type="date" name="label">
+          </article>
+
+          <article class="field is-grouped is-grouped-right">
+            <p class="control">
+              <button id="btn-cancelar-editar" class="button is-light is-rounded" aria-label="Boton de cancelar editar operacion">Cancelar</button>
+            </p>
+            <p class="control">
+              <button id="btn-editar-editar" class="button button is-link is-rounded" aria-label="Boton editar nueva operacion">Editar</button>
+            </p>
+          </article>
+        
+          </article>
+        </section>
+      </section>
+
+    </section>
+
+<!--------------------------------------------------------------CATEGORIAS------------------------------------------------------------------------------>
+    <section id="pagina-categ"  class="container pt-5 hidden">
+      <section class="columns is-multiline">
+        <section class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+          <article class="box">
+            <h2 class="title is-size-2 has-text-weight-bold">Categorias</h2>
+
+            <label for="categoria-input" class="label mt-6">Nombre</label>
+            
+            <section class="field is-grouped">
+              <article class="control is-expanded">
+                <input id="categoria-input" class="input is-rounded" type="text" name="">
+              </article>
+
+              <article class="control">
+                <button id="agregar-categoria-boton" class="button button is-link is-rounded" onclick="addCategories()" aria-label="Boton agregar nueva categoria">
+                  Agregar
+                </button>
+              </article>
+            </section>
+
+            <article id="lista-categorias" class="mt-6">
+              <section class="mb-3">
+                <article class="columns is-vcentered is-mobile">
+                  <article class="column">
+                    <span class="tag button is-link is-rounded is-light">Comida</span>
+                  </article>
+                  <article class="column is-narrow has-text">
+                    <a href="#" class="mr-4 is-size7 edit-link">Editar</a>
+                    <a href="#" class="is-size-7 delete-link">Eliminar</a>
+                    <p></p>
+                  </article>
+                </article>
+              </section>
+
+              <section class="mb-3">
+                <article class="columns is-vcentered is-mobile">
+                  <article class="column">
+                     <span class="tag button is-link is-rounded is-light">Salidas</span>
+                  </article>
+                  <article class="column is-narrow has-text">
+                     <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
+                     <a href="#" class="is-size-7 delete-link">Eliminar</a>
+                     <p></p>
+                 </article>
+                </article>
+              </section>
+  
+              <section class="mb-3">
+                <article class="columns is-vcentered is-mobile">
+                  <article class="column">
+                      <span class="tag button is-link is-rounded is-light">Educación</span>
+                  </article>
+                  <article class="column is-narrow has-text">
+                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
+                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
+                      <p></p>
+                  </article>
+                </article>
+              </section>
+  
+              <section class="mb-3">
+                <article class="columns is-vcentered is-mobile">
+                  <article class="column">
+                      <span class="tag button is-link is-rounded is-light">Transporte</span>
+                  </article>
+                  <article class="column is-narrow has-text">
+                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
+                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
+                      <p></p>
+                  </article>
+                </article>
+              </section>
+  
+              <section class="mb-3">
+                <article class="columns is-vcentered is-mobile">
+                  <article class="column">
+                      <span class="tag button is-link is-rounded is-light">Trabajo</span>
+                  </article>
+                  <article class="column is-narrow has-text">
+                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
+                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
+                      <p></p>
+                  </article>
+                </article>
+              </section>
+            </article>
+            </article>
+          </section>
+        </section>
+      </section>
+  
+     <!-----------------------------------------------------Reportes--------------------------------------------------->
+      <section id="pagina-reportes" class="container pt-5 hidden">
+        <section class="columns is-multiline">
+          <section class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+            <div class="box">
+              <h1 class="title is-size-2 has-text-weight-bold">Reportes</h1>
+
+
+<!--------------------------------------------------Seccion Sin los reportes--------------------------------------------------->
+              <div id="sin-reportes"class="field">
+                <div class="my-5 py-5">
+                <figure class="image mt-5">
+                  <!--buscar imagen y ponerlo aca-->
+                </figure>
+                </div>
+                <div class="column is-align-items-center">
+                  <h4 class="title is-size-4 is-size-6-mobile has-text-centered">Operaciones insuficientes</h4>
+                  <p class="subtitle is-size-6 is-size-7-mobile has-text-centered">Prueba agregando más operaciones</p>
+                </div>
+              </div>
+            <!-------------------------------------- Seccion con Reportes---------------------------------------------->
+              <!-- COMIENZA LISTADO DE REPORTES -->
+              <div id="con-reportes" class="hidden">
+  
+                <!-- Resumen -->
+                <div id="listado-reportes" class="section mb-5">
+                  <h2 class="title is-size-4 mb-5 pb-4">Resumen</h2>
+                  <div id="reporte-resumen"></div>
+                </div>
+                
+                <!-- Total por categoría -->
+                <div class="section mb-5">
+                  <h2 class="title is-size-4 mb-5 pb-4">Totales por categoría</h2>
+                  <div class="columns has-text-weight-medium is-mobile mb-5">
+                    <div class="column">Categoría</div>
+                    <div class="column blue-cero">Ganancias</div>
+                    <div class="column red-cero">Gastos</div>
+                    <div class="column">Balance</div>
+                  </div>
+                  <div id="reporte-total-categorias"></div>
+                </div>
+  
+                <!-- totales por mes -->
+                <div class="section mb-5" id="total-month">
+                  <h2 class="title is-size-4 mb-5 pb-4">Totales por mes</h2>
+                  <div class="columns has-text-weight-medium is-mobile mb-5">
+                    <div class="column">Mes</div>
+                    <div class="column blue-cero">Ganancias</div>
+                    <div class="column red-cero">Gastos</div>
+                    <div class="column">Balance</div>
+                  </div>
+                  <div id="reporte-total-mes"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </section>      
+     <!----------------------------------------------------------EDITAR Categorias-------------------------------------------->
+      <section id="editar-categoria" class="container pt-5 hidden">
+        <section class="columns is-multiline">
+          <section class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+            <article class="box">          
+              <h2 class="title is-size-2 has-text-weight-bold">Editar categoría</h2>
+            
+              <label class="label mt-6" for="categoria-input">Nombre</label>
+  
+              <section class="field is-grouped">
+                <article class="control is-expanded">
+                    <input id="input-editar-categoria" class="input is-rounded" type="text" name="">
+                </article>              
+              </section>
+  
+              <article class="field is-grouped is-grouped-right">
+                <p class="control">
+                  <a id="btn-cancel-edit-category" class="button is-light is-rounded" aria-label="Botón de cancelar editar categoría">
+                    Cancelar</a>
+                </p>
+                <p class="control">
+                  <a id="btn-edit-edit-category" class="button button is-link is-rounded" aria-label="Botón de editar categoría">
+                    Editar
+                  </a>
+                </p>
+              </article>
+            </article>
+          </section>
+        </section>
+      </section>
+   
+
+  </main>
+    <script src="./app.js"></script>
+</body>
+</html>
