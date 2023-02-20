@@ -58,7 +58,7 @@ window.addEventListener("load", () => {
 
   const paginacateg = document.getElementById("pagina-categ");
   const agregarCategoriaBoton = document.getElementById("agregar-categoria-boton");
-  const listaCategorias = document.getElementById("lista-categorias");
+  const listaCategorias = document.getElementById("lista-categorias"); 
   const editarCategoria = document.getElementById("editar-categoria");
   const inputEditarCategoria = document.getElementById("input-editar-categoria");
   const btnCancelEditCategory = document.getElementById("btn-cancel-edit-category");
@@ -140,22 +140,21 @@ window.addEventListener("load", () => {
   inputEditarFecha.value = inputFecha.value;
   filtroFecha.value = inputFecha.value;
 
-  // --------------------------OPERACIONES------------------------------
-  // funcion para generar id con metodo math para despues usarlo cuando agregue la funcion de pintar operacion
-  // const generateId = () => {
-  //     let p1 = Math.floor(Math.random() * 0x10000);
-  //     let p2 = new Date().getTime();
-  //     return `${p1}${p2}`;
-  // };
-  //----------------------------Nueva Operacion------------------
-  //Vor a crear las catergorias asignandole un id relacionado al nombre q se predefinido
+
+  //----------------------------Nueva categoria------------------
+
+const contenedorCategorias = document.getElementById('contenedor-categorias')
+const selectCategorias = document.getElementsByClassName("select-categorias");
+
   let categories = [
-    { id: 0, name: "Servicios" },
-    { id: 1, name: "Transporte" },
-    { id: 2, name: "Educacion" },
-    { id: 3, name: "Trabajo" },
-    { id: 4, name: "Comida" },
+    { id: crypto.randomUUID(), name: "Servicios" },
+    { id: crypto.randomUUID(), name: "Transporte" },
+    { id: crypto.randomUUID(), name: "Educacion" },
+    { id: crypto.randomUUID(), name: "Trabajo" },
+    { id: crypto.randomUUID(), name: "Comida" },
   ];
+  
+
 
   const reseteoForm = () => {
     inputDescripcion.value = "";
@@ -197,10 +196,10 @@ window.addEventListener("load", () => {
     }
 
     operaciones.push(pintarOperacion);
+
     localStorage.setItem("operacionesStorage", JSON.stringify(operaciones));
-    const agarrarOperacionesStorage = JSON.parse(
-      localStorage.getItem("operacionesStorage")
-    );
+    const agarrarOperacionesStorage = JSON.parse(localStorage.getItem("operacionesStorage"));
+    
     reseteoForm();
     creandoOperaciones(agarrarOperacionesStorage);
     pagBalance.style.display = "block";
@@ -280,8 +279,7 @@ window.addEventListener("load", () => {
                         <button class="button is-inverted tag is-link is-size-6"('${
                           operaciones[i].id
                         }')"><i class="fas fa-pen"></i></button>
-                        <button class="button is-inverted tag is-danger is-size-6"('${
-                          operaciones[i].id
+                        <button class="button is-inverted tag is-danger is-size-6" ('${operaciones[i].id
                         }')"><i class="fas fa-trash-alt"></i></i></button>
                     </div> 
                 </div>
@@ -313,67 +311,77 @@ window.addEventListener("load", () => {
   };
 
   operaciones =
-    JSON.parse(localStorage.getItem("operacionesStorage")) ?? operaciones;
+  JSON.parse(localStorage.getItem("operacionesStorage")) ?? operaciones;
   creandoOperaciones(operaciones);
   SinoHayOcultarOpe(operaciones);
 
-  //----------->>>  add Categoria                <<<<------
-
-  const addCategoria =  () =>{
-    if(categoriaInput.value != ""){
-        categories.push({ id: categories.length, name:categoriaInput.value})
-
-        categoriaInput.value ="";
-    }
-    localStorage.setItem('categorias', JSON.stringify(categories))
-    categories = JSON.parse(localStorage.getItem('categorias'))
-  } 
-
-  //------------->>>>  editar mi categoria  <<<<<<<------------------
- 
-  let index;
-
-  const editCategory = (category) => {
-    editarCategoria.style.display = 'block'
-    paginacateg.style.display = 'none'
-    console.log(category)
-    index = categories.findIndex((e) => e.id === Number(category));
-    inputEditarCategoria.value = categories[index].name
-    return index
-  };
   
-//-------------------------->>>Boton de EDITAR CATEGORIA<<<------------------------
- 
-btnEditEditCategory.addEventListener("click", () => {
-    categories[index].name = inputEditarCategoria.value;
-    localStorage.setItem("categorias", JSON.stringify(categories));
+  const generarCategorias = () =>{
+    for (let i = 0; i < selectCategorias.length; i++){
+      console.log(generarCategorias(selectCategorias))
+      const categSelect = selectCategorias[i];
+     
+      categSelect.innerHTML = "";
+      if(categSelect.classList.contains("filtro-categorias")){
+        categSelect.innerHTML = "<option value='todas'>Todas</option>";
 
-    creandoOperaciones(operaciones);
-    editarCategoria.style.display = 'none'
-    paginacateg.style.display = 'block'
-  })
+      }       
+      
+      let str = "";
+      categories.forEach((categoria) => {
+        const {nombre, id} = categoria;
+        categSelect.innerHTML += `<option value="${nombre}">${nombre}</option>`;
+        str = 
+            str + 
+            `<div class="contenedor-span-editar-eliminar d-flex justify-content-between my-3 text-center align-items-center">
+        <span class="span-nombre-categoria text-white p-1 rounded-2 fw-semibold">${nombre}</span>
+        <div class="me-3">
+        <a href="#" data-id=${id} class="link-editar-eliminar-categoria link-editar-categoria text-decoration-none ms-4 text-white" aria-label="editar categoría ${nombre}" >Editar</a
+        ><a href="#" data-id=${id} class="link-editar-eliminar-categoria link-eliminar-categoria text-decoration-none ms-4 text-white"aria-label="eliminar categoría ${nombre}">Eliminar</a>
+        </div>
+        </div>`;
+    });
+    contenedorCategorias.innerHTML = str;
+    
+  }
+  generarCategorias();
+}
+       
+  //     if(!Array.isArray(categories)){
+  //       alertify.error("El tipo de dato es incorrecto");
+  //     }else{
+  //       localStorage.setItem("categories", JSON.stringify(categories));
+  //     }
 
-//--------------------------->>> ELIMINAR CATEGORIA <<<----------------------------
+  //     const linkEliminarCateg = document.querySelectorAll(".link-eliminar-categoria");
+  //     const linkEditarCateg = document.querySelectorAll(".link-editar-categoria");
+      
+      
+  //     const eliminarCategoria = (arr,e, operaciones) => {
+  //       const buscarCategoria = arr.find(
+  //         (categ) => categ.id === e.target.dataset.id).nombre;
+  //         const borrarCategoria = arr.filter(
+  //           (categ) => categ.id !== e.target.dataset.id);
+  //         const borrarOperacion =  operaciones.filter(
+  //           (operaciones) => operaciones.categ !== buscarCategoria);
+            
+  //       localStorage.setItem("categorias", JSON.stringify(borrarCategoria));
+  //       categories = JSON.parse(localStorage.getItem("categorias"))
+  //       generarCategorias();
+  //       localStorage.setItem("operaciones", JSON.stringify(borrarOperacion));
+  //       operaciones = JSON.parse(localStorage.getItem("operaciones"));
 
-const deleteCategory = (category) => {
-    const value = categories.findIndex((e) => e.id == category);
-
-    if(value >= 0) {
-        categories.splice(value, 1);
-        localStorage.setItem("categorias", JSON.stringify(categories));
-    };
-};
-
-
-//----------------------->>> Ahora el boton de Eliminar Categoria <<<-----------------------
- 
-btnCancelEditCategory.addEventListener('click', () => {
-    creandoOperaciones(operaciones);
-    editarCategoria.style.display ='none'
-    paginacateg.style.display = 'block'
-});
-
-
+  //       linkEliminarCateg.forEach((btn) =>{
+  //         btn.addEventListener("click", (e) => {
+  //           e.preventDefault();
+           
+  //         });
+  //       });
+          
+  //       }
+        
+    
+  // }
 
 
 }); //cierra window

@@ -92,7 +92,7 @@
                 <label class="label" for="filtro-categoria">Categoria</label>
                 <article class="control">
                   <article class="select is-fullwidth is-rounded">
-                    <select id="filtro-categoria"></select>
+                    <select class="select-categorias filtro-categorias" id="filtro-categoria"></select>
                   </article>
                 </article>
               </section>
@@ -202,7 +202,7 @@
               <label for="categoria-operacion-select" class="label">Categoria</label>
               <article class="control">
                 <article class="select is-fullwidth is-rounded">
-                  <select id="categoria-operacion-select"></select>
+                  <select class="select-categorias" id="categoria-operacion-select"></select>
                 </article>                
               </article>
             </section>
@@ -260,7 +260,7 @@
             <label for="categoria-operac-editar-select" class="label">Categoria</label>
             <article class="control">
               <article class="select is-fullwidth is-rounded">
-                <select id="categoria-operac-editar-select"></select>
+                <select class="select-categorias" id="categoria-operac-editar-select"></select>
               </article>
             </article>
           </section>
@@ -290,92 +290,32 @@
       <section class="columns is-multiline">
         <section class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
           <article class="box">
+           
             <h2 class="title is-size-2 has-text-weight-bold">Categorias</h2>
 
             <label for="categoria-input" class="label mt-6">Nombre</label>
             
             <section class="field is-grouped">
-              <article class="control is-expanded">
-                <input id="categoria-input" class="input is-rounded" type="text" name="">
-              </article>
+                <article class="control is-expanded">
+                  <input id="categoria-input" class="input is-rounded" type="text" name="">
+                </article>
 
-              <article class="control">
-                <button id="agregar-categoria-boton" class="button button is-link is-rounded" aria-label="Boton agregar nueva categoria">
-                  Agregar
-                </button>
-              </article>
-            </section>
-
-            <article id="lista-categorias" class="mt-6">
-              <section class="mb-3">
-                <article class="columns is-vcentered is-mobile">
-                  <article class="column">
-                    <span class="tag button is-link is-rounded is-light">Comida</span>
-                  </article>
-                  <article class="column is-narrow has-text">
-                    <a href="#" class="mr-4 is-size7 edit-link">Editar</a>
-                    <a href="#" class="is-size-7 delete-link">Eliminar</a>
-                    <p></p>
-                  </article>
-                </article>
-              </section>
-
-              <section class="mb-3">
-                <article class="columns is-vcentered is-mobile">
-                  <article class="column">
-                     <span class="tag button is-link is-rounded is-light">Salidas</span>
-                  </article>
-                  <article class="column is-narrow has-text">
-                     <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
-                     <a href="#" class="is-size-7 delete-link">Eliminar</a>
-                     <p></p>
-                 </article>
-                </article>
-              </section>
-  
-              <section class="mb-3">
-                <article class="columns is-vcentered is-mobile">
-                  <article class="column">
-                      <span class="tag button is-link is-rounded is-light">Educación</span>
-                  </article>
-                  <article class="column is-narrow has-text">
-                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
-                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
-                      <p></p>
-                  </article>
-                </article>
-              </section>
-  
-              <section class="mb-3">
-                <article class="columns is-vcentered is-mobile">
-                  <article class="column">
-                      <span class="tag button is-link is-rounded is-light">Transporte</span>
-                  </article>
-                  <article class="column is-narrow has-text">
-                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
-                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
-                      <p></p>
-                  </article>
-                </article>
-              </section>
-  
-              <section class="mb-3">
-                <article class="columns is-vcentered is-mobile">
-                  <article class="column">
-                      <span class="tag button is-link is-rounded is-light">Trabajo</span>
-                  </article>
-                  <article class="column is-narrow has-text">
-                      <a href="#" class="mr-4 is-size-7 edit-link">Editar</a>
-                      <a href="#" class="is-size-7 delete-link">Eliminar</a>
-                      <p></p>
-                  </article>
-                </article>
-              </section>
-            </article>
-            </article>
-          </section>
+                <article class="control">
+                  <button id="agregar-categoria-boton" class="button button is-link is-rounded" aria-label="Boton agregar nueva categoria">
+                    Agregar
+                  </button>
+                </article>                
+            </section>             
+          </article>
+          <div id="contenedor-categorias"></div>  
         </section>
+
+
+           
       </section>
+    </section>
+
+      
   
      <!-----------------------------------------------------Reportes--------------------------------------------------->
       <section id="pagina-reportes" class="container pt-5 hidden">
